@@ -1,18 +1,13 @@
 
 import './App.css';
-import logo from './assets/logosfondo.png'
+import Navbar from './components/Navbar';
 
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="logo nuevo" alt="logo" />
-        <p>
-          <h6>Sitio en Construccion</h6>
-        </p>
-        <p>Proximamente</p>
-      </header>
+    <div>
+    <Navbar/>
+    <h1 className='App'> SITIO EN CONSTRUCCION</h1>
     </div>
   );
 }
