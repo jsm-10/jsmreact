@@ -1,6 +1,6 @@
 import './App.css';
 import Navbar from './components/Navbar';
-import Cards from './components/Cards.js';
+import ItemListContainer from './components/ItemListContainer';
 
 
 
@@ -8,7 +8,7 @@ function App() {
   return (
     <div>
     <Navbar/>
-    <Cards/>
+    <ItemListContainer />
     <h1 className='App'> SITIO EN CONSTRUCCION</h1>
     </div>
   );
