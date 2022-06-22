@@ -1,5 +1,6 @@
 
 import './Cards.css';
+import ItemCount from './ItemCount';
 
 function Cards(props) {
     return (
@@ -14,6 +15,7 @@ function Cards(props) {
     <li className="list-group-item">{props.uso}</li>
     <li className="list-group-item">{props.certificado}</li>
 </ul>
+<ItemCount start={1} stock={10}/>
 </div>
     );
 }
