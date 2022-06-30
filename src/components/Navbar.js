@@ -1,6 +1,6 @@
 import logo from '../assets/logosfondo.png';
-import cssnav from './Navbar.css'
-import Carrito from './CartWidget.js'
+import './Navbar.css';
+import Carrito from './CartWidget.js';
 
 
 function Navbar() {

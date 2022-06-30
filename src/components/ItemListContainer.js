@@ -15,7 +15,7 @@ function ItemListContainer() {
             },3000
         )
     }, [])
-    console.log(products);
+    
     
     return (
     <>
