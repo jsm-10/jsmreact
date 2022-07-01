@@ -7,6 +7,7 @@
         "precio": "$60.000",
         "img": "/assets/video.jpg",
         "certificado": "Certificacion aprobada",
+        "type": "VideoCard",
         "stock": "2"
     },
     {
@@ -17,6 +18,7 @@
         "precio": "$30.000",
         "img": "/assets/r9.jpg",
         "certificado": "Certificacion aprobada",
+        "type":"Procesador",
         "stock": "4"
     },
     {
@@ -27,6 +29,7 @@
         "precio": "$40.000",
         "img": "/assets/i7.jpg",
         "certificado": "Certificacion aprobada",
+        "type":"Procesador",
         "stock": "3"
     },
     {
@@ -37,6 +40,7 @@
         "precio": "$20.000",
         "img": "/assets/ssdsm.jpg",
         "certificado": "Certificacion aprobada",
+        "type":"Almacenamiento",
         "stock": "5"
     },
     {
@@ -47,6 +51,7 @@
         "precio": "$40.000",
         "img": "/assets/lianligb.jpg",
         "certificado": "Certificacion aprobada",
+        "type": "Gabinete",
         "stock": "1"
     }
 ]

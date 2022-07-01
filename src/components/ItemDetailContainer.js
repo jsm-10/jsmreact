@@ -1,28 +1,33 @@
-import Catalogo from '../data.json'
+import Products from '../data.json'
 import ItemDetail from './ItemDetail';
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
-function getCatalogo(){
+function getProducts(id){
     return new Promise( (resolve, rejected) =>{
         setTimeout(() => {
-            resolve(Catalogo);
-        }, 2000)
+            const productsFound = Products.find ((product) =>{
+                return parseInt(id) === product.id;
+            })
+            resolve(productsFound);
+        }, 700);
     });
 }
 
 function ItemDetailContainer() {
-    const [catal, setCatal] = useState([]);
+    const [Products, setProducts] = useState([]);
+    const { itemid } = useParams();
 
     useEffect(() => {
-        getCatalogo().then( respuestaPromise => {
-            setCatal(respuestaPromise[0]);
+        getProducts(itemid).then( respuestaPromise => {
+            setProducts(respuestaPromise);
         })
-    }, []);
-    console.log("estamos aca" + catal);
+    }, [itemid]);
+    
     
     return (
     <>
-    <ItemDetail catal={catal}/>
+    <ItemDetail Products={Products}/>
     </>
 
     
