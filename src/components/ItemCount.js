@@ -12,6 +12,9 @@ function ItemCount(props) {
         setCant(cant -1);
         }
     }
+    function handleClick(){
+        props.onAdd(cant);
+    }
     return (
         <div className="">
             <h3 className="d-flex justify-content-center fs-6">Seleccionar</h3>
@@ -21,7 +24,7 @@ function ItemCount(props) {
                 <button type="button" className='btn btn-dark align-self-center' onClick={agregar}>+</button>
             </div>
             <div className="d-flex justify-content-center align-self-center">
-                <button type="button" className="btn btn-outline-dark " >Agregar al carrito</button>
+                <button type="button" onClick={handleClick} className="btn btn-outline-dark " >Agregar al carrito</button>
             </div>
         </div>
     )
