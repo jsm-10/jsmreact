@@ -1,12 +1,16 @@
 import {Link} from 'react-router-dom'
 import { useState } from 'react';
 import ItemCount from './ItemCount';
+import useCartContext from '../store/cartContext';
 
 function ItemDetail({ Products }) {
     const [enCarrito, setenCarrito] = useState(false);
+    const { addToCart } = useCartContext();
+    
     function onAdd(cant){
-        console.log(`agregaste al carrito ${cant} productos.`);
         setenCarrito(true);
+        addToCart(Products, cant);
+        console.log("agregado al cart", Products, cant)
     }
     
     return  (

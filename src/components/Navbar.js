@@ -4,6 +4,7 @@ import Carrito from './CartWidget.js';
 import { Link } from 'react-router-dom';
 
 
+
 function Navbar() {
     return (
         <header>
