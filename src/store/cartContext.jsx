@@ -14,6 +14,7 @@ export function CartContextProvider({ children }) {
     const [cart, setCart] = useState([]);
     
 
+
     const addToCart = (item, cant) => {
         console.log(isInCart(item.id));
         if (isInCart(item.id)) {
@@ -26,7 +27,7 @@ export function CartContextProvider({ children }) {
                 }
                     
                 else{ 
-                    console.log("12")
+                    // console.log("12")
                     return cartItem;
         }  })
             setCart(newCart)
@@ -34,7 +35,7 @@ export function CartContextProvider({ children }) {
 
 
         else {
-            console.log("1234")
+            // console.log("1234")
             const newItem = { ...item, cant };
             setCart([...cart, newItem]);
         }
@@ -47,6 +48,10 @@ export function CartContextProvider({ children }) {
         setCart(cartFilter);
 
     }
+    const clearCart=() => {
+        setCart([]);
+    }
+
     const isInCart = (id) => {
         let found = false
         cart.forEach(cartItem =>  {
@@ -56,19 +61,20 @@ export function CartContextProvider({ children }) {
                 found = true;
                 
         }
+
     })
         if (found){
             return true;
         }
         return false;
     }
-        
+    
 
     const contextFunction = () => console.log("contexto!!");
     console.log (cart);
 
     return (
-        <Provider value={{ contextFunction, cart, addToCart }}>
+        <Provider value={{ contextFunction, cart, addToCart, removeFromCart, clearCart}}>
             {children}
         </Provider>
     )
