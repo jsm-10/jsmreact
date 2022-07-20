@@ -1,25 +1,17 @@
-import Products from '../data.json'
+
 import ItemDetail from './ItemDetail';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-
-function getProducts(id){
-    return new Promise( (resolve, rejected) =>{
-        setTimeout(() => {
-            const productsFound = Products.find ((product) =>{
-                return parseInt(id) === product.id;
-            })
-            resolve(productsFound);
-        }, 700);
-    });
-}
+import { getProduct } from '../services/firestore';
 
 function ItemDetailContainer() {
-    const [Products, setProducts] = useState([]);
+    const [products, setProducts] = useState([]);
     const { itemid } = useParams();
 
     useEffect(() => {
-        getProducts(itemid).then( respuestaPromise => {
+        getProduct(itemid)
+        .then( respuestaPromise => {
+            console.log("promesa" + respuestaPromise);
             setProducts(respuestaPromise);
         })
     }, [itemid]);
@@ -27,7 +19,7 @@ function ItemDetailContainer() {
     
     return (
     <>
-    <ItemDetail Products={Products}/>
+    <ItemDetail products={products}/>
     </>
 
     
