@@ -11,7 +11,6 @@ function ItemDetailContainer() {
     useEffect(() => {
         getProduct(itemid)
         .then( respuestaPromise => {
-            console.log("promesa" + respuestaPromise);
             setProducts(respuestaPromise);
         })
     }, [itemid]);

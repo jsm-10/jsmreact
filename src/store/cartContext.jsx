@@ -57,16 +57,12 @@ export function CartContextProvider({ children }) {
         cart.forEach(cartItem =>  {
             console.log(cartItem);
             if (cartItem.id === id){
-                console.log("asdasd");
                 found = true;
                 
         }
 
     })
-        if (found){
-            return true;
-        }
-        return false;
+        return found
     }
     
 

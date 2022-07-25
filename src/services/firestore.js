@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs, getDoc, doc } from 'firebase/firestore';
+import { getFirestore, collection, getDocs, getDoc, doc, Timestamp, addDoc } from 'firebase/firestore';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -35,10 +35,26 @@ export async function getAllProducts() {
 }
 export async function getProduct(id) {
     const productsCollectionRef = collection(dataBase, "products");
-const docRef = doc(productsCollectionRef, "9rs0IXX7vp8G2pEt2LKV")
+const docRef = doc(productsCollectionRef, id)
 
 const docSnapshot = await getDoc(docRef);
 
 return docSnapshot.data();
 }
+export async function createBuyOrder(orderData){
+    const buyTimestamp = Timestamp.now();
+
+    const ocf = {
+        ...orderData,  
+        date: buyTimestamp
+    };
+    
+    const miColec = collection (dataBase, "buyOrders");
+    const orderDoc = await addDoc(miColec, ocf);
+    
+    return orderDoc.id;
+    
+}
+
 export default dataBase;
+
