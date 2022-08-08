@@ -2,7 +2,7 @@
 import ItemList from './ItemList'
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getAllProducts } from '../services/firestore'
+import { getAllProducts, getItemsCat } from '../services/firestore'
 
 
 function ItemListContainer() {
@@ -12,10 +12,17 @@ function ItemListContainer() {
     
 
     useEffect( ()=>{
+        if(categoryid === undefined){
+            getAllProducts().then (data => {
+                setProducts(data)
+            });
+        }
+        else{
+            getItemsCat(categoryid).then (data => {
+                setProducts(data)
+            });
+        }
         
-        getAllProducts().then (data => {
-            setProducts(data)
-        });
     },[categoryid]);
     
     return (

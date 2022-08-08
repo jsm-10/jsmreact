@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import useCartContext from "../store/cartContext";
 import { Link, useParams } from 'react-router-dom';
 import { createBuyOrder } from "../services/firestore";
@@ -8,14 +8,20 @@ function Cart() {
     const { cart, removeFromCart, clearCart, } = useCartContext();
     let suma = 0;
     cart.map(i => suma = (suma + (parseInt(i.precio) * parseInt(i.cant))))
-    const [orderId, setOrderId] = useState("");
-    const { id } = useParams();
+    const [orderId, setOrderId] = useState();
+    const {id} = useParams();
+    
 
-
+    useEffect(() =>{
+        createBuyOrder(id)
+        .then(respuesta =>{
+            setOrderId(respuesta)
+        })
+        }, []);
 
     function pressCompra() {
-        setOrderId(createBuyOrder.id);
-
+        
+    
         const buyOrder = {
             buyer: {
                 name: "Jsm",
@@ -23,39 +29,29 @@ function Cart() {
                 email: "jsm@coder.com",
 
             },
-            items: [...cart],
+            items: {...cart},
             total: ({ suma })
         }
         createBuyOrder(buyOrder);
         clearCart();
-    }
-
-
-    useEffect(() => {
-        createBuyOrder(id)
-            .then(respuestaPromise => {
-                setOrderId(respuestaPromise);
-            })
-    }, []);
-   
-    
-
-    if (cart.length === 0) {
+        setOrderId(createBuyOrder.id);
         Swal.fire({
             icon: 'success',
             title: 'Compra finalizada!',
-            text: 'Gracias por confiar en nosotros!!',
+            text: `Su numero de orden es ${orderId}`,
+            footer: 'Verifique su casilla de mail para el seguimiento'
             
     })
+    }
+
+    if (cart.length === 0) {
+        
         return (
             <div style={{ textAlign: "center" }}>
-               
                 
                 <h4>No se encuentran Productos</h4>
                 <Link to={"/Shop"}><button type="button" className="btn btn-outline-dark mb-5" >Volver al shop</button></Link>
-                <h4>Su orden es {orderId}</h4>
-                <br />
-                <span>Nos contactaremos a la brevedad para informale el estado del envio</span>
+
 
             </div>
         )
@@ -79,7 +75,7 @@ function Cart() {
                 <br></br>
                 <button type="button" onClick={clearCart} className="btn btn-outline-dark">Borrar Carrito</button>
                 <h2>Precio total ${suma}</h2>
-                <button onClick={pressCompra} type="button" className="btn btn-outline-dark">Finalizar tu compra</button>
+                <Link to={"/"}><button onClick={pressCompra} type="button" className="btn btn-outline-dark">Finalizar tu compra</button></Link>
 
             </div>
         )

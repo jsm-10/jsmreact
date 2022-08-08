@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs, getDoc, doc, Timestamp, addDoc } from 'firebase/firestore';
+import { getFirestore, collection, getDocs, getDoc, doc, Timestamp, addDoc, query, where } from 'firebase/firestore';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -33,14 +33,35 @@ export async function getAllProducts() {
     })
     return dataProducts;
 }
+
+export async function getItemsCat(categoryid){
+    const miColec = collection(dataBase, "products");
+    const queryProduct= query(miColec, where("type", "==", categoryid));
+    const docSnapshot= await getDocs(queryProduct);
+
+    return docSnapshot.docs.map(item => {
+        return{
+            ...item.data(),
+            id: item.id,
+        }
+    });
+
+}
+
+
+
+
+
 export async function getProduct(id) {
     const productsCollectionRef = collection(dataBase, "products");
 const docRef = doc(productsCollectionRef, id)
 
 const docSnapshot = await getDoc(docRef);
 
-return docSnapshot.data();
+return { ...docSnapshot.data(), id: docSnapshot.id};
 }
+export default dataBase;
+
 export async function createBuyOrder(orderData){
     const buyTimestamp = Timestamp.now();
 
@@ -51,10 +72,9 @@ export async function createBuyOrder(orderData){
     
     const miColec = collection (dataBase, "buyOrders");
     const orderDoc = await addDoc(miColec, ocf);
+    console.log (orderDoc.id);
     
     return orderDoc.id;
     
 }
-
-export default dataBase;
 
